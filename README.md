@@ -1,171 +1,142 @@
-# End-to-end-Machine-Learning-Project-with-MLflow
+# 🚀 ML Project with MLflow & DagsHub
+
+An **end-to-end Machine Learning pipeline** built using industry best practices.  
+This project covers the complete ML lifecycle — from data ingestion to model evaluation — with **experiment tracking using MLflow** and **remote logging via DagsHub**.
+
+---
+
+## 📌 Project Features
+
+- Modular ML pipeline
+- Configuration-driven architecture (YAML based)
+- Data ingestion, validation, transformation
+- Model training & evaluation
+- Experiment tracking using **MLflow**
+- Remote MLflow tracking via **DagsHub**
+- Flask web application for UI
+- Clean logging & exception handling
+
+---
 
 
-## Workflows
+## 🗂️ Project Structure
 
-1. Update config.yaml
-2. Update schema.yaml
-3. Update params.yaml
-4. Update the entity
-5. Update the configuration manager in src config
-6. Update the components
-7. Update the pipeline 
-8. Update the main.py
-9. Update the app.py
-
-
-
-# How to run?
-### STEPS:
-
-Clone the repository
-
-```bash
-https://github.com/vyash0048-bit/MLproject-with-MLflow =
+```text
+MLproject-with-MLflow/
+├── config/
+│   └── config.yaml
+│
+├── src/
+│   └── mlProject/
+│       ├── components/
+│       │   ├── data_ingestion.py
+│       │   ├── data_validation.py
+│       │   ├── data_transformation.py
+│       │   ├── model_trainer.py
+│       │   └── model_evaluation.py
+│       │
+│       ├── pipeline/
+│       │   ├── stage_01_data_ingestion.py
+│       │   ├── stage_02_data_validation.py
+│       │   ├── stage_03_data_transformation.py
+│       │   ├── stage_04_model_trainer.py
+│       │   └── stage_05_model_evaluation.py
+│       │
+│       ├── config/
+│       │   └── configuration.py
+│       │
+│       ├── entity/
+│       │   └── config_entity.py
+│       │
+│       ├── utils/
+│       │   └── common.py
+│       │
+│       └── logger/
+│
+├── templates/
+│   └── index.html
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── assets/
+│       └── img/
+│
+├── artifacts/
+│   ├── data_ingestion/
+│   ├── data_validation/
+│   ├── data_transformation/
+│   ├── model_trainer/
+│   └── model_evaluation/
+│
+├── app.py
+├── main.py
+├── requirements.txt
+└── README.md
 ```
-### STEP 01- Create a conda environment after opening the repository
 
-```bash
+## 🛠️ How to Run the Project
+
+### 🔹 STEP 1: Clone the Repository
+
+git clone https://github.com/vyash0048-bit/MLproject-with-MLflow.git
+cd MLproject-with-MLflow
+
+### 🔹 STEP 2: Create Conda Environment
 conda create -n mlproj python=3.8 -y
-```
-
-```bash
 conda activate mlproj
-```
-
-
-### STEP 02- install the requirements
-```bash
+### 🔹 STEP 3: Install Dependencies
 pip install -r requirements.txt
-```
+### 🔹 STEP 4: Run ML Pipeline
+python main.py
+This will execute:
 
+- Data Ingestion
+- Data Validation
+- Data Transformation
+- Model Training
+- Model Evaluation
+- MLflow logging
 
-```bash
-# Finally run the following command
+### 🔹 STEP 5: Run Flask Web App
 python app.py
-```
+Open in browser: http://127.0.0.1:8080
 
-Now,
-```bash
-open up you local host and port
-```
+### 📊 MLflow Experiment Tracking
+▶ Local MLflow UI (optional)
+mlflow ui
+Open: http://127.0.0.1:5000
+Note: Local UI shows only local runs.
 
+### 🌐 DagsHub Integration (Remote Tracking)
+MLflow experiments are logged remotely to DagsHub.
 
+### 🔑 Set Environment Variables (Windows)
+setx MLFLOW_TRACKING_URI "https://dagshub.com/vyash0048/MLproject-with-MLflow.mlflow"
+setx MLFLOW_TRACKING_USERNAME "vyash0048"
+setx MLFLOW_TRACKING_PASSWORD "<YOUR_DAGSHUB_TOKEN>"
+⚠️ Restart terminal after setting variables.
 
-## MLflow
+### 🔍 View Experiments on DagsHub
+https://dagshub.com/vyash0048/MLproject-with-MLflow
+→ Experiments → MLflow
+🔐 Security Note
+🚨 Never commit access tokens to GitHub.
 
-[Documentation](https://mlflow.org/docs/latest/index.html)
+Use environment variables
 
+Add .env to .gitignore
 
-##### cmd
-- mlflow ui
+Rotate tokens if exposed
 
-### dagshub
-[dagshub](https://dagshub.com/)
+## 🧠 Key Highlights
+- Industry-grade ML project structure
+- Configuration-driven pipelines
+- MLflow + DagsHub integration
+- Flask UI integration
 
-import dagshub
-dagshub.init(repo_owner='vyash0048', repo_name='MLproject-with-MLflow', mlflow=True)
-
-import mlflow
-with mlflow.start_run():
-  mlflow.log_param('parameter name', 'value')
-  mlflow.log_metric('metric name', 1)
-
-Run this to export as env variables:
-
-```bash
-
-export MLFLOW_TRACKING_URI=https://dagshub.com/vyash0048/MLproject-with-MLflow.mlflow
-
-export MLFLOW_TRACKING_USERNAME=vyash0048 
-
-export MLFLOW_TRACKING_PASSWORD=6824692c47a369aa6f9eac5b10041d5c8edbcef0
-
-```
-
-
-
-# AWS-CICD-Deployment-with-Github-Actions
-
-## 1. Login to AWS console.
-
-## 2. Create IAM user for deployment
-
-	#with specific access
-
-	1. EC2 access : It is virtual machine
-
-	2. ECR: Elastic Container registry to save your docker image in aws
-
-
-	#Description: About the deployment
-
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 566373416292.dkr.ecr.ap-south-1.amazonaws.com/mlproj
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-    AWS_ACCESS_KEY_ID=
-
-    AWS_SECRET_ACCESS_KEY=
-
-    AWS_REGION = us-east-1
-
-    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
-
-    ECR_REPOSITORY_NAME = simple-app
-
-
-
-
-## About MLflow 
-MLflow
-
- - Its Production Grade
- - Trace all of your expriements
- - Logging & tagging your model
-
-
+## 🚀 Future Improvements
+- Add DVC for data versioning
+- Add FastAPI inference service
+- Add CI/CD with GitHub Actions
+- Cloud deployment (AWS / GCP)

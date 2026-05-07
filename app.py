@@ -42,11 +42,17 @@ def index():
             obj = PredictionPipeline()
             predict = obj.predict(data)
 
-            return render_template('results.html', prediction = str(predict))
+            # Map numerical predictions to text labels
+            result_map = {0: "Low Quality", 1: "Medium Quality", 2: "High Quality"}
+            final_result = result_map.get(int(predict[0]), "Unknown")
+
+            return render_template('results.html', prediction = final_result)
 
         except Exception as e:
-            print('The Exception message is: ',e)
-            return 'something is wrong'
+            import traceback
+            print('The Exception message is: ', e)
+            print(traceback.format_exc())
+            return 'something is wrong: ' + str(e)
 
     else:
         return render_template('index.html')

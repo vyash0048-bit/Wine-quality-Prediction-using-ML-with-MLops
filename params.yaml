@@ -1,3 +1,8 @@
-ElasticNet:
-  alpha: 0.025
-  l1_ratio: 0.005
+XGBoost:
+  n_estimators: 300
+  learning_rate: 0.05
+  max_depth: 6
+  subsample: 0.8
+  colsample_bytree: 0.8
+  eval_metric: 'mlogloss'
+  random_state: 42

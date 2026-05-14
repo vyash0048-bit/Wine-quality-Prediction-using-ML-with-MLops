@@ -1,12 +1,3 @@
----
-title: Wine Quality Prediction AI
-emoji: 🍷
-colorFrom: red
-colorTo: yellow
-sdk: docker
-pinned: false
----
-
 <div align="center">
 
 # 🍷 Wine Quality Prediction AI

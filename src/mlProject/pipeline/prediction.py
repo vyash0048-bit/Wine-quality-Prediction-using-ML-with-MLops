@@ -8,18 +8,28 @@ import os
 
 class PredictionPipeline:
     def __init__(self):
-        # Paths relative to this file's location to be robust to CWD changes
-        # __file__ is src/mlProject/pipeline/prediction.py
-        # root is 4 levels up
+        # 1. Try path relative to this file (robust for local and container)
         self.root = Path(__file__).resolve().parent.parent.parent.parent
-        
         model_path = self.root / 'artifacts/model_trainer/model.joblib'
         scaler_path = self.root / 'artifacts/data_transformation/scaler.joblib'
         
+        # 2. Fallback to CWD-based path
         if not model_path.exists():
-            raise FileNotFoundError(f"Model not found at {model_path}. Current working directory: {os.getcwd()}")
+            model_path = Path('artifacts/model_trainer/model.joblib')
         if not scaler_path.exists():
-            raise FileNotFoundError(f"Scaler not found at {scaler_path}. Current working directory: {os.getcwd()}")
+            scaler_path = Path('artifacts/data_transformation/scaler.joblib')
+
+        # Diagnostic info if still missing
+        if not model_path.exists() or not scaler_path.exists():
+            error_msg = f"Artifacts missing!\nLooking for model at: {model_path.absolute()}\nLooking for scaler at: {scaler_path.absolute()}\nCWD: {os.getcwd()}\n"
+            # List current directory contents for debugging
+            try:
+                error_msg += f"Files in CWD: {os.listdir('.')}\n"
+                if os.path.exists('artifacts'):
+                    error_msg += f"Files in artifacts/: {os.listdir('artifacts')}\n"
+            except:
+                pass
+            raise FileNotFoundError(error_msg)
 
         self.model = joblib.load(model_path)
         self.scaler = joblib.load(scaler_path)

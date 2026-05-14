@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY . /app
 
+# Verify artifacts are present during build
+RUN ls -R /app/artifacts/
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Hugging Face Spaces uses port 7860 by default

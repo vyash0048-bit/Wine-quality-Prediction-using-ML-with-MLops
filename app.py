@@ -64,5 +64,17 @@ def index():
 
 if __name__ == "__main__":
 	# app.run(host="0.0.0.0", port = 8080, debug=True)
+	
+	# Debugging: Print file structure to see if artifacts are present
+	print("--- Project Structure ---", flush=True)
+	for root, dirs, files in os.walk("."):
+		level = root.replace(".", "").count(os.sep)
+		indent = " " * 4 * (level)
+		print(f"{indent}{os.path.basename(root)}/", flush=True)
+		subindent = " " * 4 * (level + 1)
+		for f in files:
+			print(f"{subindent}{f}", flush=True)
+	print("-----------------------", flush=True)
+
 	port = int(os.environ.get("PORT", 8080))
 	app.run(host="0.0.0.0", port = port)

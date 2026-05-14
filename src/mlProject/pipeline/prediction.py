@@ -2,6 +2,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from pathlib import Path
+import os
 
 
 
@@ -11,8 +12,17 @@ class PredictionPipeline:
         # __file__ is src/mlProject/pipeline/prediction.py
         # root is 4 levels up
         self.root = Path(__file__).resolve().parent.parent.parent.parent
-        self.model = joblib.load(self.root / 'artifacts/model_trainer/model.joblib')
-        self.scaler = joblib.load(self.root / 'artifacts/data_transformation/scaler.joblib')
+        
+        model_path = self.root / 'artifacts/model_trainer/model.joblib'
+        scaler_path = self.root / 'artifacts/data_transformation/scaler.joblib'
+        
+        if not model_path.exists():
+            raise FileNotFoundError(f"Model not found at {model_path}. Current working directory: {os.getcwd()}")
+        if not scaler_path.exists():
+            raise FileNotFoundError(f"Scaler not found at {scaler_path}. Current working directory: {os.getcwd()}")
+
+        self.model = joblib.load(model_path)
+        self.scaler = joblib.load(scaler_path)
 
     
     def predict(self, data):

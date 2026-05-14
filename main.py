@@ -1,26 +1,8 @@
 import os
 import sys
-import mlflow
-import dagshub
 
 # Force local src import
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
-
-# ---------- MLflow + DagsHub SETUP (ONCE) ----------
-os.environ["MLFLOW_TRACKING_USERNAME"] = "vyash0048"
-os.environ["MLFLOW_TRACKING_PASSWORD"] = "ff0a8bd84e9708a0fc9bd7259a0b2fc85fcec80e"
-
-mlflow.set_tracking_uri(
-    "https://dagshub.com/vyash0048/MLproject-with-MLflow.mlflow"
-)
-
-dagshub.init(
-    repo_owner="vyash0048",
-    repo_name="MLproject-with-MLflow",
-    mlflow=True
-)
-# --------------------------------------------------
-
 
 from mlProject import logger
 from mlProject.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline

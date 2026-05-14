@@ -19,4 +19,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://user:$HF_TOKEN@huggingface.co/spaces/vyash0048/Wine-quality-Prediction main
+        run: git push --force https://user:$HF_TOKEN@huggingface.co/spaces/YashAI07/Wine-quality-Prediction main

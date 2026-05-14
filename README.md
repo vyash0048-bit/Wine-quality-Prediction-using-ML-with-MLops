@@ -1,3 +1,12 @@
+---
+title: Wine Quality Prediction AI
+emoji: 🍷
+colorFrom: red
+colorTo: yellow
+sdk: docker
+pinned: false
+---
+
 # 🍷 Wine Quality Prediction AI
 
 An **end-to-end Machine Learning pipeline** for predicting wine quality, built with a modular architecture and deployed to **Hugging Face Spaces**.

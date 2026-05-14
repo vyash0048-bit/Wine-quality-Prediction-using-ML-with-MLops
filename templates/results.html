@@ -4,11 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Prediction Result - Wine Quality AI</title>
-    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="static/css/styles.css" rel="stylesheet" />
+    <link href="/static/css/styles.css" rel="stylesheet" />
     <style>
         :root {
             --wine-red: #800020;
@@ -16,35 +18,56 @@
             --gold: #D4AF37;
             --gold-light: #f1d592;
             --cream: #F8F9FA;
+            --glass-bg: rgba(255, 255, 255, 0.9);
             --low-color: #8b0000;
             --med-color: #d2691e;
             --high-color: #228b22;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--cream);
-            color: #2c3e50;
+            font-family: 'Poppins', sans-serif !important;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/static/assets/img/generated_bg.jpg') no-repeat center center fixed !important;
+            background-size: cover !important;
+            color: #2c3e50 !important;
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         .masthead {
-            background: linear-gradient(135deg, var(--wine-dark) 0%, var(--wine-red) 100%);
-            padding: 80px 0;
-            color: white;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat !important;
+            background-size: cover !important;
+            background-position: center !important;
+            padding: 80px 0 !important;
+            color: white !important;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .masthead::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(77, 0, 18, 0.9) 0%, rgba(128, 0, 32, 0.7) 100%) !important;
+            z-index: 1;
+        }
+
+        .masthead .container {
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Playfair Display', serif !important;
+            font-size: 3.5rem !important;
+            font-weight: 700 !important;
+            color: var(--gold) !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4) !important;
             letter-spacing: -1px;
         }
 
@@ -57,120 +80,179 @@
         }
 
         .result-card {
-            background: white;
-            border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            padding: 80px 40px;
+            background: var(--glass-bg) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+            border-radius: 35px !important;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15) !important;
+            padding: 60px 40px !important;
             text-align: center;
-            max-width: 650px;
+            max-width: 700px;
             width: 100%;
-            border-top: 8px solid var(--gold);
-            animation: fadeIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            position: relative;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 8px;
+            background: var(--gold);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .lottie-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
         }
 
         .result-label {
             font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #999;
-            margin-bottom: 15px;
+            letter-spacing: 4px;
+            color: #777;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
         .prediction-text {
             font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: 800;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             display: block;
             letter-spacing: -2px;
         }
 
         /* Dynamic Colors */
-        .quality-High { color: var(--high-color); text-shadow: 0 0 20px rgba(34, 139, 34, 0.1); }
-        .quality-Medium { color: var(--med-color); text-shadow: 0 0 20px rgba(210, 105, 30, 0.1); }
-        .quality-Low { color: var(--low-color); text-shadow: 0 0 20px rgba(139, 0, 0, 0.1); }
+        .quality-High { color: var(--high-color); text-shadow: 0 10px 25px rgba(34, 139, 34, 0.2); }
+        .quality-Medium { color: var(--med-color); text-shadow: 0 10px 25px rgba(210, 105, 30, 0.2); }
+        .quality-Low { color: var(--low-color); text-shadow: 0 10px 25px rgba(139, 0, 0, 0.2); }
 
         .result-description {
-            font-size: 1.1rem;
-            color: #666;
+            font-size: 1.2rem;
+            color: #555;
             margin-bottom: 50px;
-            max-width: 450px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.8;
+            font-weight: 400;
         }
 
         .btn-back {
-            background: linear-gradient(to right, var(--wine-red), var(--wine-dark));
+            background: linear-gradient(135deg, var(--wine-red), var(--wine-dark));
             color: white;
             border: none;
-            padding: 18px 45px;
-            border-radius: 50px;
+            padding: 20px 50px;
+            border-radius: 60px;
             text-decoration: none;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            transition: all 0.4s;
+            font-size: 0.95rem;
+            transition: all 0.5s;
             display: inline-block;
-            box-shadow: 0 5px 15px rgba(128, 0, 32, 0.2);
+            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.25);
         }
 
         .btn-back:hover {
             background: var(--wine-dark);
             color: var(--gold);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(128, 0, 32, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(128, 0, 32, 0.4);
         }
 
         .footer {
             padding: 40px 0;
-            background: #eee;
+            background: rgba(0,0,0,0.03);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .prediction-text { font-size: 3.5rem; }
+            .result-card { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
     <!-- Page Header-->
     <header class="masthead">
-        <div class="container">
-            <h1>Analysis Report</h1>
+        <div class="container" data-aos="fade-down">
+            <h1>Expert Analysis Report</h1>
         </div>
     </header>
 
     <!-- Result Content-->
     <div class="result-container">
-        <div class="result-card">
-            <div class="result-label">The AI Expert Concludes</div>
+        <div class="result-card" data-aos="zoom-in" data-aos-duration="800">
+            <div class="lottie-container" id="lottie-player"></div>
+            
+            <div class="result-label" data-aos="fade-up" data-aos-delay="400">The AI Conclusion</div>
             
             {% if "High" in prediction %}
-                <span class="prediction-text quality-High">{{prediction}}</span>
-                <p class="result-description">This wine exhibits an exceptional chemical balance, robust structure, and premium characteristics favored by connoisseurs.</p>
+                <span class="prediction-text quality-High" data-aos="fade-up" data-aos-delay="600">{{prediction}}</span>
+                <p class="result-description" data-aos="fade-up" data-aos-delay="800">This vintage exhibits exceptional character, a refined bouquet, and a structural balance that defines the pinnacle of quality.</p>
             {% elif "Low" in prediction %}
-                <span class="prediction-text quality-Low">{{prediction}}</span>
-                <p class="result-description">The analytical data suggests significant chemical inconsistencies and a profile that does not meet standard quality thresholds.</p>
+                <span class="prediction-text quality-Low" data-aos="fade-up" data-aos-delay="600">{{prediction}}</span>
+                <p class="result-description" data-aos="fade-up" data-aos-delay="800">The analytical profile indicates significant chemical imbalances that fall below the expected thresholds for standard vintages.</p>
             {% else %}
-                <span class="prediction-text quality-Medium">{{prediction}}</span>
-                <p class="result-description">A dependable, standard profile with balanced features suitable for regular consumption and versatile pairings.</p>
+                <span class="prediction-text quality-Medium" data-aos="fade-up" data-aos-delay="600">{{prediction}}</span>
+                <p class="result-description" data-aos="fade-up" data-aos-delay="800">A classic and reliable profile, showing consistent chemical properties and a balance suitable for versatile enjoyment.</p>
             {% endif %}
 
-            <a href="/" class="btn-back">ANALYZES ANOTHER VINTAGE</a>
+            <div data-aos="fade-up" data-aos-delay="1000">
+                <a href="/" class="btn-back">ANALYZE ANOTHER VINTAGE</a>
+            </div>
         </div>
     </div>
 
     <!-- Footer-->
     <footer class="footer">
         <div class="container text-center">
-            <p class="text-muted small">Powered by XGBoost & MLOps</p>
+            <p class="text-muted small mb-0">Powered by Advanced XGBoost & MLOps Excellence</p>
         </div>
     </footer>
 
-    <!-- Bootstrap core JS-->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 1000,
+            easing: 'ease-out-back'
+        });
+
+        // Dynamic Lottie Animation based on prediction
+        const prediction = "{{prediction}}";
+        let animationPath = '';
+        
+        if (prediction.includes('High')) {
+            // Celebration/Success animation
+            animationPath = 'https://assets10.lottiefiles.com/packages/lf20_touohxv0.json';
+        } else if (prediction.includes('Low')) {
+            // Warning/Alert animation
+            animationPath = 'https://assets10.lottiefiles.com/packages/lf20_TkwJUT.json';
+        } else {
+            // Neutral/Balance animation
+            animationPath = 'https://assets10.lottiefiles.com/packages/lf20_qpwb7l.json';
+        }
+
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-player'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: animationPath
+        });
+    </script>
 </body>
 </html>

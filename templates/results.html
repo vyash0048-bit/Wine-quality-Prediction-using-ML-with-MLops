@@ -1,95 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Prediction</title>
-        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="static/css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>-->
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('static/assets/img/wine.gif')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Wine Quality</h1>
-                             <h1>{{prediction}}</h1>
-                            <span class="subheading"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Prediction Result - Wine Quality AI</title>
+    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="static/css/styles.css" rel="stylesheet" />
+    <style>
+        :root {
+            --wine-red: #800020;
+            --wine-dark: #4d0012;
+            --gold: #D4AF37;
+            --gold-light: #f1d592;
+            --cream: #F8F9FA;
+            --low-color: #8b0000;
+            --med-color: #d2691e;
+            --high-color: #228b22;
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-        <!-- Footer-->
-        <footer class="border-top">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a href="https://www.linkedin.com/in/boktiarahmed73/">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://www.youtube.com/dswithbappy">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://github.com/entbappy">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="small text-center text-muted fst-italic"></div>
-                        <div class="small text-center text-muted fst-italic"></div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="static/js/scripts.js"></script>
-    </body>
+        .masthead {
+            background: linear-gradient(135deg, var(--wine-dark) 0%, var(--wine-red) 100%);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+        }
+
+        .result-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            padding: 80px 40px;
+            text-align: center;
+            max-width: 650px;
+            width: 100%;
+            border-top: 8px solid var(--gold);
+            animation: fadeIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #999;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .prediction-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 35px;
+            display: block;
+            letter-spacing: -2px;
+        }
+
+        /* Dynamic Colors */
+        .quality-High { color: var(--high-color); text-shadow: 0 0 20px rgba(34, 139, 34, 0.1); }
+        .quality-Medium { color: var(--med-color); text-shadow: 0 0 20px rgba(210, 105, 30, 0.1); }
+        .quality-Low { color: var(--low-color); text-shadow: 0 0 20px rgba(139, 0, 0, 0.1); }
+
+        .result-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 50px;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .btn-back {
+            background: linear-gradient(to right, var(--wine-red), var(--wine-dark));
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.4s;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(128, 0, 32, 0.2);
+        }
+
+        .btn-back:hover {
+            background: var(--wine-dark);
+            color: var(--gold);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(128, 0, 32, 0.3);
+        }
+
+        .footer {
+            padding: 40px 0;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Header-->
+    <header class="masthead">
+        <div class="container">
+            <h1>Analysis Report</h1>
+        </div>
+    </header>
+
+    <!-- Result Content-->
+    <div class="result-container">
+        <div class="result-card">
+            <div class="result-label">The AI Expert Concludes</div>
+            
+            {% if "High" in prediction %}
+                <span class="prediction-text quality-High">{{prediction}}</span>
+                <p class="result-description">This wine exhibits an exceptional chemical balance, robust structure, and premium characteristics favored by connoisseurs.</p>
+            {% elif "Low" in prediction %}
+                <span class="prediction-text quality-Low">{{prediction}}</span>
+                <p class="result-description">The analytical data suggests significant chemical inconsistencies and a profile that does not meet standard quality thresholds.</p>
+            {% else %}
+                <span class="prediction-text quality-Medium">{{prediction}}</span>
+                <p class="result-description">A dependable, standard profile with balanced features suitable for regular consumption and versatile pairings.</p>
+            {% endif %}
+
+            <a href="/" class="btn-back">ANALYZES ANOTHER VINTAGE</a>
+        </div>
+    </div>
+
+    <!-- Footer-->
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="text-muted small">Powered by XGBoost & MLOps</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

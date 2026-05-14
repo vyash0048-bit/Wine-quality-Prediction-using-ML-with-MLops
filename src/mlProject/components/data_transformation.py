@@ -20,15 +20,12 @@ class DataTransformation:
         # 1. Load & clean
         df = df.drop_duplicates()
 
-        # 2. Remove outliers (Disabled - often removes the very samples needed to identify High/Low quality)
-        # for col in ['total sulfur dioxide', 'chlorides', 'residual sugar']:
-        #     Q1, Q3 = df[col].quantile(0.25), df[col].quantile(0.75)
-        #     IQR = Q3 - Q1
-        #     df = df[(df[col] >= Q1 - 1.5*IQR) & (df[col] <= Q3 + 1.5*IQR)]
+        # 2. Feature Reduction (Dropping low correlation features)
+        cols_to_drop = ['residual sugar', 'free sulfur dioxide', 'pH']
+        df = df.drop(columns=cols_to_drop)
 
         # 3. Feature engineering
         df['alcohol_to_acidity'] = df['alcohol'] / df['volatile acidity']
-        df['sulfur_ratio'] = df['free sulfur dioxide'] / df['total sulfur dioxide']
 
         # 4. Bin quality (0: <=4, 1: 5-6, 2: >=7)
         df['quality'] = df['quality'].apply(lambda q: 0 if q <= 4 else (2 if q >= 7 else 1))

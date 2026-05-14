@@ -1,142 +1,102 @@
-# 🚀 ML Project with MLflow & DagsHub
+# 🍷 Wine Quality Prediction AI
 
-An **end-to-end Machine Learning pipeline** built using industry best practices.  
-This project covers the complete ML lifecycle — from data ingestion to model evaluation — with **experiment tracking using MLflow** and **remote logging via DagsHub**.
+An **end-to-end Machine Learning pipeline** for predicting wine quality, built with a modular architecture and deployed to **Hugging Face Spaces**.
+
+This project implements a streamlined 8-feature prediction model using **XGBoost**, featuring automated data transformation, SMOTE for class balancing, and a polished Flask web interface.
 
 ---
 
 ## 📌 Project Features
 
-- Modular ML pipeline
-- Configuration-driven architecture (YAML based)
-- Data ingestion, validation, transformation
-- Model training & evaluation
-- Experiment tracking using **MLflow**
-- Remote MLflow tracking via **DagsHub**
-- Flask web application for UI
-- Clean logging & exception handling
+- **Streamlined Feature Set**: Optimized using correlation analysis (8 key chemical features).
+- **Advanced Preprocessing**: Automated handling of outliers, class imbalance (SMOTE), and scaling.
+- **XGBoost Classifier**: High-performance gradient boosting model.
+- **Modular Pipeline**: Clean separation of ingestion, validation, transformation, training, and evaluation.
+- **Flask Web Interface**: Modern, responsive UI for easy quality prediction.
+- **Hugging Face Deployment**: Automated CI/CD deployment via GitHub Actions.
+- **Robust Error Handling**: Real-time validation for non-numeric user inputs.
 
 ---
 
+## 🧪 Chemical Features Used (Reduced Set)
+
+We optimized the model by dropping low-correlation features (*residual sugar, free sulfur dioxide, pH*) to focus on:
+1. **Fixed Acidity**
+2. **Volatile Acidity**
+3. **Citric Acid**
+4. **Chlorides**
+5. **Total Sulfur Dioxide**
+6. **Density**
+7. **Sulphates**
+8. **Alcohol**
+
+---
 
 ## 🗂️ Project Structure
 
 ```text
-MLproject-with-MLflow/
-├── config/
-│   └── config.yaml
-│
-├── src/
-│   └── mlProject/
-│       ├── components/
-│       │   ├── data_ingestion.py
-│       │   ├── data_validation.py
-│       │   ├── data_transformation.py
-│       │   ├── model_trainer.py
-│       │   └── model_evaluation.py
-│       │
-│       ├── pipeline/
-│       │   ├── stage_01_data_ingestion.py
-│       │   ├── stage_02_data_validation.py
-│       │   ├── stage_03_data_transformation.py
-│       │   ├── stage_04_model_trainer.py
-│       │   └── stage_05_model_evaluation.py
-│       │
-│       ├── config/
-│       │   └── configuration.py
-│       │
-│       ├── entity/
-│       │   └── config_entity.py
-│       │
-│       ├── utils/
-│       │   └── common.py
-│       │
-│       └── logger/
-│
-├── templates/
-│   └── index.html
-│
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── assets/
-│       └── img/
-│
-├── artifacts/
-│   ├── data_ingestion/
-│   ├── data_validation/
-│   ├── data_transformation/
-│   ├── model_trainer/
-│   └── model_evaluation/
-│
-├── app.py
-├── main.py
-├── requirements.txt
-└── README.md
+Wine-quality-Prediction/
+├── src/mlProject/
+│   ├── components/      # Modular logic for each ML stage
+│   ├── pipeline/        # Stage execution scripts
+│   ├── config/          # Configuration management
+│   └── entity/          # Data structure definitions
+├── templates/           # Flask HTML templates
+├── static/              # CSS, JS, and Assets
+├── artifacts/           # Generated data, models, and scalers
+├── app.py               # Flask application
+├── main.py              # Pipeline execution script
+├── Dockerfile           # Hugging Face deployment config
+└── requirements.txt     # Python dependencies
 ```
 
-## 🛠️ How to Run the Project
+---
 
-### 🔹 STEP 1: Clone the Repository
+## 🛠️ How to Run Locally
 
-git clone https://github.com/vyash0048-bit/MLproject-with-MLflow.git
-cd MLproject-with-MLflow
+### 🔹 1. Clone the Repository
+```bash
+git clone https://github.com/vyash0048-bit/Wine-quality-Prediction-using-ML-with-MLops.git
+cd Wine-quality-Prediction-using-ML-with-MLops
+```
 
-### 🔹 STEP 2: Create Conda Environment
-conda create -n mlproj python=3.8 -y
-conda activate mlproj
-### 🔹 STEP 3: Install Dependencies
+### 🔹 2. Create Environment
+```bash
+python -m venv venv
+venv\Scripts\activate  # Windows
+source venv/bin/activate  # Linux/Mac
+```
+
+### 🔹 3. Install Dependencies
+```bash
 pip install -r requirements.txt
-### 🔹 STEP 4: Run ML Pipeline
+```
+
+### 🔹 4. Execute ML Pipeline (Retrain)
+```bash
 python main.py
-This will execute:
+```
+This runs the full lifecycle: Ingestion → Validation → Transformation → Training → Evaluation.
 
-- Data Ingestion
-- Data Validation
-- Data Transformation
-- Model Training
-- Model Evaluation
-- MLflow logging
-
-### 🔹 STEP 5: Run Flask Web App
+### 🔹 5. Start Web App
+```bash
 python app.py
-Open in browser: http://127.0.0.1:8080
+```
+Open: `http://127.0.0.1:8080`
 
-### 📊 MLflow Experiment Tracking
-▶ Local MLflow UI (optional)
-mlflow ui
-Open: http://127.0.0.1:5000
-Note: Local UI shows only local runs.
+---
 
-### 🌐 DagsHub Integration (Remote Tracking)
-MLflow experiments are logged remotely to DagsHub.
+## 🚀 Deployment
 
-### 🔑 Set Environment Variables (Windows)
-setx MLFLOW_TRACKING_URI "https://dagshub.com/vyash0048/MLproject-with-MLflow.mlflow"
-setx MLFLOW_TRACKING_USERNAME "vyash0048"
-setx MLFLOW_TRACKING_PASSWORD "<YOUR_DAGSHUB_TOKEN>"
-⚠️ Restart terminal after setting variables.
+The project is deployed on **Hugging Face Spaces** using Docker.
 
-### 🔍 View Experiments on DagsHub
-https://dagshub.com/vyash0048/MLproject-with-MLflow
-→ Experiments → MLflow
-🔐 Security Note
-🚨 Never commit access tokens to GitHub.
+- **Live Demo**: [Hugging Face Space](https://huggingface.co/spaces/YashAI07/Wine-quality-Prediction)
+- **CI/CD**: Any push to the `main` branch automatically triggers a GitHub Action to sync the repository with the Hugging Face Hub.
 
-Use environment variables
+---
 
-Add .env to .gitignore
-
-Rotate tokens if exposed
-
-## 🧠 Key Highlights
-- Industry-grade ML project structure
-- Configuration-driven pipelines
-- MLflow + DagsHub integration
-- Flask UI integration
-
-## 🚀 Future Improvements
-- Add DVC for data versioning
-- Add FastAPI inference service
-- Add CI/CD with GitHub Actions
-- Cloud deployment (AWS / GCP)
+## 🧠 Technical Highlights
+- **Architecture**: Modular and configuration-driven (YAML).
+- **Class Balancing**: SMOTE used during transformation to handle minority quality classes.
+- **Persistence**: Models and scalers saved as `.joblib` for efficient inference.
+- **Scalability**: Designed to easily add more features or swap models in `params.yaml`.

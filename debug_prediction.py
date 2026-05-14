@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath('src'))
 from mlProject.pipeline.prediction import PredictionPipeline
 
 # Load some test data
-raw_data = pd.read_csv('artifacts/data_ingestion/winequality-red.csv')
+raw_data = pd.read_csv('Wine-quality-Prediction-using-ML-with-MLops/artifacts/data_ingestion/winequality-red.csv')
 
 # Use only the features expected by the updated pipeline
 expected_cols = [

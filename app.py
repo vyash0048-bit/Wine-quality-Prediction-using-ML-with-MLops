@@ -27,14 +27,17 @@ def index():
 	if request.method == 'POST':
 		try:
 			#  reading the inputs given by the user
-			fixed_acidity =float(request.form['fixed_acidity'])
-			volatile_acidity =float(request.form['volatile_acidity'])
-			citric_acid =float(request.form['citric_acid'])
-			chlorides =float(request.form['chlorides'])
-			total_sulfur_dioxide =float(request.form['total_sulfur_dioxide'])
-			density =float(request.form['density'])
-			sulphates =float(request.form['sulphates'])
-			alcohol =float(request.form['alcohol'])
+			try:
+				fixed_acidity =float(request.form['fixed_acidity'])
+				volatile_acidity =float(request.form['volatile_acidity'])
+				citric_acid =float(request.form['citric_acid'])
+				chlorides =float(request.form['chlorides'])
+				total_sulfur_dioxide =float(request.form['total_sulfur_dioxide'])
+				density =float(request.form['density'])
+				sulphates =float(request.form['sulphates'])
+				alcohol =float(request.form['alcohol'])
+			except ValueError:
+				return render_template('index.html', error="Invalid input: Please enter numeric values only.")
 	   
 		 
 			data = [fixed_acidity,volatile_acidity,citric_acid,chlorides,total_sulfur_dioxide,density,sulphates,alcohol]

@@ -10,7 +10,7 @@ pinned: false
 <div align="center">
 
 # 🍷 Wine Quality Prediction AI
-### *An Intelligent Modular ML Ecosystem for Enology*
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=B91C1C&center=true&vCenter=true&width=435&lines=Modular+MLOps+Ecosystem;XGBoost+Quality+Engine;End-to-End+Automation" alt="Typing SVG" />
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-Framework-black?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
@@ -20,7 +20,7 @@ pinned: false
 <br>
 
 ## 🚀 [**LIVE DEMO: TRY THE PREDICTOR**](https://huggingface.co/spaces/YashAI07/Wine-quality-Prediction)
-*Experience the real-time quality analysis powered by XGBoost*
+*Experience real-time enological analysis*
 
 </div>
 
@@ -28,9 +28,19 @@ pinned: false
 
 ## 🌟 Overview
 
-This project is a comprehensive, **End-to-End MLOps Pipeline** designed to predict the quality of wine based on its chemical properties. Built with a **modular architecture**, it bridges the gap between research notebooks and production-ready applications.
+This project is a comprehensive **End-to-End MLOps Pipeline** designed to predict wine quality using chemical analysis. It features a robust **XGBoost** backend and a seamless **GitHub-to-HuggingFace** CI/CD sync.
 
-> **Goal**: Provide a robust, scalable, and automated system that handles everything from raw data ingestion to real-time cloud inference.
+---
+
+## 📈 Performance at a Glance
+
+<div align="center">
+  
+**Accuracy** ➔ `80.51%` | **F1-Score** ➔ `80.33%`
+<br>
+*(Optimized via SMOTE & Robust Scaling)*
+
+</div>
 
 ---
 
@@ -120,23 +130,6 @@ python main.py
 python app.py
 ```
 Visit `localhost:8080` to start predicting!
-
----
-
-## 📈 Model Performance
-
-The model was evaluated on a held-out test set, demonstrating strong predictive capabilities across multiple quality categories:
-
-<div align="center">
-
-| Metric | Score |
-| :--- | :--- |
-| **Accuracy** | ![Accuracy](https://img.shields.io/badge/80.51%25-green?style=flat-square) |
-| **F1-Score (Weighted)** | ![F1 Score](https://img.shields.io/badge/80.33%25-green?style=flat-square) |
-
-</div>
-
-> **Note**: These scores are achieved using an **XGBoost Classifier** after addressing class imbalance with **SMOTE**, ensuring the model doesn't just predict the most frequent quality class.
 
 ---
 

@@ -7,105 +7,148 @@ sdk: docker
 pinned: false
 ---
 
+<div align="center">
+
 # 🍷 Wine Quality Prediction AI
+### *An Intelligent Modular ML Ecosystem for Enology*
 
-An **end-to-end Machine Learning pipeline** for predicting wine quality, built with a modular architecture and deployed to **Hugging Face Spaces**.
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-Framework-black?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Docker](https://img.shields.io/badge/Docker-Container-blue?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=for-the-badge)](https://huggingface.co/spaces/YashAI07/Wine-quality-Prediction)
 
-This project implements a streamlined 8-feature prediction model using **XGBoost**, featuring automated data transformation, SMOTE for class balancing, and a polished Flask web interface.
+<br>
 
----
+## 🚀 [**LIVE DEMO: TRY THE PREDICTOR**](https://huggingface.co/spaces/YashAI07/Wine-quality-Prediction)
+*Experience the real-time quality analysis powered by XGBoost*
 
-## 📌 Project Features
-
-- **Streamlined Feature Set**: Optimized using correlation analysis (8 key chemical features).
-- **Advanced Preprocessing**: Automated handling of outliers, class imbalance (SMOTE), and scaling.
-- **XGBoost Classifier**: High-performance gradient boosting model.
-- **Modular Pipeline**: Clean separation of ingestion, validation, transformation, training, and evaluation.
-- **Flask Web Interface**: Modern, responsive UI for easy quality prediction.
-- **Hugging Face Deployment**: Automated CI/CD deployment via GitHub Actions.
-- **Robust Error Handling**: Real-time validation for non-numeric user inputs.
+</div>
 
 ---
 
-## 🧪 Chemical Features Used (Reduced Set)
+## 🌟 Overview
 
-We optimized the model by dropping low-correlation features (*residual sugar, free sulfur dioxide, pH*) to focus on:
-1. **Fixed Acidity**
-2. **Volatile Acidity**
-3. **Citric Acid**
-4. **Chlorides**
-5. **Total Sulfur Dioxide**
-6. **Density**
-7. **Sulphates**
-8. **Alcohol**
+This project is a comprehensive, **End-to-End MLOps Pipeline** designed to predict the quality of wine based on its chemical properties. Built with a **modular architecture**, it bridges the gap between research notebooks and production-ready applications.
+
+> **Goal**: Provide a robust, scalable, and automated system that handles everything from raw data ingestion to real-time cloud inference.
 
 ---
 
-## 🗂️ Project Structure
+## ⚡ Key Features
+
+- 🎯 **Optimized Feature Engineering**: Uses correlation-driven feature selection (8 key chemical markers).
+- ⚖️ **Imbalance Handling**: Implements **SMOTE** (Synthetic Minority Over-sampling Technique) to ensure fair predictions across all quality grades.
+- 🏗️ **Modular Architecture**: Strictly follows the industry-standard "Component-Pipeline" design pattern.
+- 🐳 **Dockerized Deployment**: Fully containerized for seamless scaling and consistent environments.
+- 🔄 **Automated CI/CD**: Integrated GitHub Actions for zero-downtime updates to Hugging Face Spaces.
+- 🛡️ **Fail-Safe Validation**: Real-time input sanitization and diagnostic logging for production stability.
+
+---
+
+## 🛠️ Technology Stack
+
+| Category | Tools |
+| :--- | :--- |
+| **Language** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) |
+| **ML Framework** | ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=flat&logo=scikit-learn&logoColor=white) ![XGBoost](https://img.shields.io/badge/XGBoost-black?style=flat) |
+| **API/Web** | ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=flat&logo=flask&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white) |
+| **MLOps/CI/CD** | ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat&logo=github-actions&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white) |
+| **Tracking** | ![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat&logo=mlflow&logoColor=white) |
+
+---
+
+## 📊 The ML Pipeline Flow
+
+```mermaid
+graph LR
+    A[Data Ingestion] --> B[Data Validation]
+    B --> C[Data Transformation]
+    C --> D[Model Trainer]
+    D --> E[Model Evaluation]
+    E --> F[Deployment]
+    style F fill:#f96,stroke:#333,stroke-width:4px
+```
+
+1.  📥 **Ingestion**: Automated fetching and extraction of wine datasets.
+2.  ✅ **Validation**: Schema verification to ensure data integrity.
+3.  🧪 **Transformation**: SMOTE oversampling + Robust Scaling.
+4.  🤖 **Training**: XGBoost classification with hyperparameter tuning.
+5.  📈 **Evaluation**: Performance metrics (Accuracy, Precision, Recall).
+
+---
+
+## 🗂️ Project Anatomy
 
 ```text
-Wine-quality-Prediction/
-├── src/mlProject/
-│   ├── components/      # Modular logic for each ML stage
-│   ├── pipeline/        # Stage execution scripts
-│   ├── config/          # Configuration management
-│   └── entity/          # Data structure definitions
-├── templates/           # Flask HTML templates
-├── static/              # CSS, JS, and Assets
-├── artifacts/           # Generated data, models, and scalers
-├── app.py               # Flask application
-├── main.py              # Pipeline execution script
-├── Dockerfile           # Hugging Face deployment config
-└── requirements.txt     # Python dependencies
+📂 root
+├── 📁 src/mlProject/     # Core Business Logic
+│   ├── 📁 components/    # Individual Stage Implementations
+│   ├── 📁 pipeline/      # Orchestration Logic
+│   └── 📁 config/        # YAML Configuration Management
+├── 📁 artifacts/         # Models, Scalers, and Processed Data
+├── 📁 templates/         # Modern Flask UI Components
+├── 📄 app.py             # Production Entry Point
+├── 📄 main.py            # Pipeline Execution Engine
+└── 🐳 Dockerfile         # Container Specification
 ```
 
 ---
 
-## 🛠️ How to Run Locally
+## 💻 Local Development
 
-### 🔹 1. Clone the Repository
+### 1. Setup Environment
 ```bash
-git clone https://github.com/vyash0048-bit/Wine-quality-Prediction-using-ML-with-MLops.git
-cd Wine-quality-Prediction-using-ML-with-MLops
-```
+# Clone
+git clone https://github.com/vyash0048-bit/Wine-quality-Prediction-using-ML-with-MLops.git && cd Wine-quality-Prediction-using-ML-with-MLops
 
-### 🔹 2. Create Environment
-```bash
+# Initialize Venv
 python -m venv venv
-venv\Scripts\activate  # Windows
-source venv/bin/activate  # Linux/Mac
-```
+source venv/bin/activate # or venv\Scripts\activate on Windows
 
-### 🔹 3. Install Dependencies
-```bash
+# Install
 pip install -r requirements.txt
 ```
 
-### 🔹 4. Execute ML Pipeline (Retrain)
+### 2. Run the Engine
+*To retrain the model and regenerate artifacts:*
 ```bash
 python main.py
 ```
-This runs the full lifecycle: Ingestion → Validation → Transformation → Training → Evaluation.
 
-### 🔹 5. Start Web App
+### 3. Launch UI
 ```bash
 python app.py
 ```
-Open: `http://127.0.0.1:8080`
+Visit `localhost:8080` to start predicting!
 
 ---
 
-## 🚀 Deployment
+## 📈 Model Performance
 
-The project is deployed on **Hugging Face Spaces** using Docker.
+The model was evaluated on a held-out test set, demonstrating strong predictive capabilities across multiple quality categories:
 
-- **Live Demo**: [Hugging Face Space](https://huggingface.co/spaces/YashAI07/Wine-quality-Prediction)
-- **CI/CD**: Any push to the `main` branch automatically triggers a GitHub Action to sync the repository with the Hugging Face Hub.
+<div align="center">
+
+| Metric | Score |
+| :--- | :--- |
+| **Accuracy** | ![Accuracy](https://img.shields.io/badge/80.51%25-green?style=flat-square) |
+| **F1-Score (Weighted)** | ![F1 Score](https://img.shields.io/badge/80.33%25-green?style=flat-square) |
+
+</div>
+
+> **Note**: These scores are achieved using an **XGBoost Classifier** after addressing class imbalance with **SMOTE**, ensuring the model doesn't just predict the most frequent quality class.
 
 ---
 
-## 🧠 Technical Highlights
-- **Architecture**: Modular and configuration-driven (YAML).
-- **Class Balancing**: SMOTE used during transformation to handle minority quality classes.
-- **Persistence**: Models and scalers saved as `.joblib` for efficient inference.
-- **Scalability**: Designed to easily add more features or swap models in `params.yaml`.
+## 🧠 Technical Deep-Dive
+
+- **Model Choice**: XGBoost was selected for its superior handling of non-linear relationships in chemical data.
+- **Performance**: Achieved **80.5% Accuracy** and **80.3% F1-Score**, providing reliable predictions for enological assessment.
+- **Handling Bias**: The dataset originally suffered from "Middle-Class Bias" (mostly medium quality wines). SMOTE was applied during the transformation phase to synthesize minority class samples, significantly improving recall for "High" and "Low" quality wines.
+- **Deployment Strategy**: We utilize a Docker-based "Pull-Sync" workflow. GitHub Actions triggers a forced update to the Hugging Face Space repository, ensuring the latest LFS-tracked models are always active.
+
+---
+
+<div align="center">
+  <p>Built with ❤️ by <a href="https://github.com/vyash0048-bit">Yash</a></p>
+</div>
